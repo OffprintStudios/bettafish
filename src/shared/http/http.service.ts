@@ -11,7 +11,7 @@ import type { HttpOptions } from './http-options.model';
  */
 export class HttpService {
     private instance: AxiosInstance = Axios.create({
-        baseURL: `http://localhost:3333`,
+        baseURL: `/api`,
         timeout: 1000,
         xsrfCookieName: 'XSRF-TOKEN',
     }); 

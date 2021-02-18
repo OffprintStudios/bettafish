@@ -6,7 +6,7 @@ import type { User } from '../../models/user';
 import { HttpService } from '../http';
 
 export class AuthService {
-    private url = `/api/auth`;
+    private url = `/auth`;
     private http: HttpService;
 
     constructor (token?: string) {
