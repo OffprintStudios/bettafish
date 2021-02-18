@@ -1,6 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const sveltePreprocess = require('svelte-preprocess');
+const less = require('svelte-preprocess-less');
+const mdsvex = require('mdsvex');
 
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
@@ -13,7 +15,7 @@ module.exports = {
 		alias: {
 			svelte: path.dirname(require.resolve('svelte/package.json'))
 		},
-		extensions: ['.mjs', '.js', '.ts', '.svelte'],
+		extensions: ['.mjs', '.js', '.ts', '.svelte', '.svx'],
 		mainFields: ['svelte', 'browser', 'module', 'main']
 	},
 	output: {
@@ -29,7 +31,7 @@ module.exports = {
 					exclude: /node_modules/
 				},
 				{
-				test: /\.svelte$/,
+				test: /\.(svelte|svx)$/,
 				use: {
 					loader: 'svelte-loader',
 					options: {
@@ -38,7 +40,20 @@ module.exports = {
 						},
 						emitCss: prod,
 						hotReload: !prod,
-							preprocess: sveltePreprocess({ sourceMap: !prod })
+							preprocess: [
+                                mdsvex.mdsvex(),
+                                sveltePreprocess({ 
+                                    sourceMap: !prod,
+                                    less: less.less(),
+                                    postcss: {
+                                        plugins: [
+                                            require('tailwindcss'),
+                                            require('autoprefixer'),
+                                            require('postcss-nesting'),
+                                        ],
+                                    },
+                                }),
+                            ],
 					}
 				}
 			},
