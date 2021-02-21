@@ -19,7 +19,7 @@
                 <button class="header-button">Search</button>
             </div>
             <div class="flex-1">
-                <img class="max-h-80 max-w-xs mx-auto" src="images/logo.png" alt="offprint" />
+                <img class="max-h-80 max-w-xs mx-auto" src="assets/images/logo.png" alt="offprint" />
                 <h2>{rotatingSlogan}</h2>
             </div>
             <div class="text-right w-24">

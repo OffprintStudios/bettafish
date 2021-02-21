@@ -11,7 +11,7 @@
     <div class="switch-container w-12 h-6 flex items-center rounded-full" on:click={switchValue}>
         <div
             class="switch w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out"
-            class:translate-x-6={value}
+            class:switch-activated={value}
         />
     </div>
     <label class="ml-3" for="toggle">{label}</label>
@@ -25,7 +25,12 @@
         cursor: pointer;
 
         div.switch {
+            background: gray;
+        }
+
+        div.switch-activated {
             background: var(--accent);
+            --tw-translate-x: 1.5rem/* 24px */;
         }
     }
 </style>

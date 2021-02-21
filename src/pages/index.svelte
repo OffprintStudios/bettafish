@@ -1,6 +1,6 @@
 <div class="flex flex-row">
     <div class="w-1/2 text-center">
-        <img class="beatriz" src="images/Beatriz.png" alt="Beatriz">
+        <img class="beatriz" src="assets/images/Beatriz.png" alt="Beatriz">
     </div>
     
     <div class="w-1/2">
