@@ -3,6 +3,7 @@ export interface RegisterUser {
     username: string;
     password: string;
     repeatPassword: string;
-    termsAgree: boolean;
+    agreedToPolicies: boolean;
     isMinAge: boolean;
+    inviteCode: string;
 }

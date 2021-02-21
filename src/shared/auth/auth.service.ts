@@ -1,12 +1,9 @@
-import type { Observable } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
 import type { LoginUser, RegisterUser } from '../../models/auth';
 import type { User } from '../../models/user';
 import { HttpService } from '../http';
 
 export class AuthService {
-    private url = `/auth`;
+    private url = `/api/auth`;
     private http: HttpService;
 
     constructor (token?: string) {
@@ -25,10 +22,10 @@ export class AuthService {
     }
 
     public register(credentials: RegisterUser) {
-        /*return this.http.handleRequest<User>(this.http.post(`${this.url}/register`, credentials, {
+        return this.http.handleRequest<User>(this.http.post(`${this.url}/register`, credentials, {
             observe: 'response', 
             withCredentials: true,
-        }));*/
+        }));
     }
 
     public logout() {

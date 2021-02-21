@@ -1,18 +1,24 @@
 <script lang="ts">
     import type { RegisterUser } from '../../models/auth';
+    import { AuthService } from '../../shared/auth';
     import Toggle from '../util/inputs/Toggle.svelte';
+
+    const auth = new AuthService();
 
     const registerUser: RegisterUser = {
         email: '',
         username: '',
         password: '',
         repeatPassword: '',
-        termsAgree: false,
+        agreedToPolicies: false,
         isMinAge: false,
+        inviteCode: ''
     };
 
     function onSubmit() {
-        alert(`click!`);
+        auth.register(registerUser).subscribe(() => {
+            alert(`success!`);
+        });
     }
 </script>
 
@@ -50,11 +56,18 @@
             bind:value={registerUser.repeatPassword}
             required
         />
+        <input
+            name="inviteCode"
+            id="inviteCode"
+            type="text"
+            placeholder="Invite Code"
+            bind:value={registerUser.inviteCode}
+        />
     </div>
 
     <div class="block">
         <Toggle
-            bind:value={registerUser.termsAgree}
+            bind:value={registerUser.agreedToPolicies}
             label="I agree to the Terms of Service, Privacy Policy, and Code of Conduct."
         />
     </div>

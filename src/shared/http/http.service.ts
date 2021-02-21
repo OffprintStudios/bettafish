@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import type { AxiosInstance, AxiosPromise, AxiosResponse, CancelTokenSource } from 'axios';
-import { Observable, throwError } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import type { HttpOptions } from './http-options.model';
 
@@ -11,9 +11,9 @@ import type { HttpOptions } from './http-options.model';
  */
 export class HttpService {
     private instance: AxiosInstance = Axios.create({
-        baseURL: `/api`,
         timeout: 1000,
         xsrfCookieName: 'XSRF-TOKEN',
+        withCredentials: true
     }); 
 
     constructor (public token?: string) {   
@@ -76,18 +76,6 @@ export class HttpService {
     }
 
     private generateObservable<T>(Axios: (...args: any[]) => AxiosPromise<T>, ...args: any[]): Observable<AxiosResponse<T>> {
-        return new Observable<AxiosResponse<T>>(subscriber => {
-
-            Axios(...args).then(res => {
-                subscriber.next(res);
-                subscriber.complete();
-            }).catch(err => {
-                subscriber.error(err);
-            });
-
-            return () => {
-                return;
-            };
-        });
+        return from(Axios(...args));
     }
 }
