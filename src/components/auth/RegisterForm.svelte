@@ -1,7 +1,9 @@
 <script lang="ts">
+    // @ts-ignore
+    import { closeModal } from 'yasp-modals';
     import type { RegisterUser } from '../../models/auth';
-    import { AuthService } from '../../shared/auth';
     import Toggle from '../util/inputs/Toggle.svelte';
+    import { AuthService } from "../../shared/auth";
 
     const auth = new AuthService();
 
@@ -17,7 +19,7 @@
 
     function onSubmit() {
         auth.register(registerUser).subscribe(() => {
-            alert(`success!`);
+            closeModal();
         });
     }
 </script>

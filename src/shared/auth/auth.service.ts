@@ -14,11 +14,7 @@ export class AuthService {
         return this.http.handleRequest<User>(this.http.post(`${this.url}/login`, credentials, {
             observe: 'response',
             withCredentials: true,
-        }), success => {
-            console.log(success);
-        }, error => {
-            console.log(error);
-        });
+        }));
     }
 
     public register(credentials: RegisterUser) {

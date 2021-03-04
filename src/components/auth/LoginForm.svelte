@@ -1,6 +1,8 @@
 <script lang="ts">
+    // @ts-ignore
+    import { closeModal } from 'yasp-modals';
     import type { LoginUser } from '../../models/auth';
-    import { AuthService } from '../../shared/auth';
+    import { AuthService } from "../../shared/auth";
     import Toggle from '../util/inputs/Toggle.svelte';
 
     const auth = new AuthService();
@@ -12,14 +14,13 @@
     };
 
     function onSubmit() {
-        console.log(`submitting form`);
         auth.login(loginUser).subscribe(() => {
-            console.log(`success!`);
+            closeModal();
         });
     }
 </script>
 
-<form on:submit={onSubmit}>
+<form on:submit|preventDefault={onSubmit}>
     <div class="mb-8">
         <input name="email" id="email" type="email" placeholder="Email Address" bind:value={loginUser.email} required />
         <input

@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import type { AxiosInstance, AxiosPromise, AxiosResponse, CancelTokenSource } from 'axios';
+import type { AxiosInstance, AxiosPromise, AxiosResponse } from 'axios';
 import { from, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import type { HttpOptions } from './http-options.model';
@@ -14,14 +14,14 @@ export class HttpService {
         timeout: 1000,
         xsrfCookieName: 'XSRF-TOKEN',
         withCredentials: true
-    }); 
+    });
+
+    private static generateObservable<T>(Axios: (...args: any[]) => AxiosPromise<T>, ...args: any[]): Observable<AxiosResponse<T>> {
+        return from(Axios(...args));
+    }
 
     constructor (public token?: string) {   
         this.instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-
-    get AxiosRef(): AxiosInstance {
-        return this.instance;
     }
 
     public handleRequest<T>(
@@ -34,48 +34,42 @@ export class HttpService {
                 if (onSuccess) {
                     onSuccess(resp);
                 }
-                console.log(resp.data);
                 return resp.data;
             }),
             catchError((err) => {
                 if (onError) {
                     onError(err);
                 }
-                console.log(err);
                 return throwError(err);
             }),
         );
     }
 
     public request<T = any>(config: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.request, config);
+        return HttpService.generateObservable<T>(this.instance.request, config);
     }
 
     public get<T = any>(url: string, config?: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.get, `${url}`, config);
+        return HttpService.generateObservable<T>(this.instance.get, `${url}`, config);
     }
 
     public delete<T = any>(url: string, config?: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.delete, `${url}`, config);
+        return HttpService.generateObservable<T>(this.instance.delete, `${url}`, config);
     }
 
     public head<T = any>(url: string, config?: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.head, `${url}`, config);
+        return HttpService.generateObservable<T>(this.instance.head, `${url}`, config);
     }
 
     public post<T = any>(url: string, data: any, config?: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.post, `${url}`, data, config);
+        return HttpService.generateObservable<T>(this.instance.post, `${url}`, data, config);
     }
 
     public put<T = any>(url: string, data: any, config?: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.put, `${url}`, data, config);
+        return HttpService.generateObservable<T>(this.instance.put, `${url}`, data, config);
     }
 
     public patch<T = any>(url: string, data: any, config?: HttpOptions): Observable<AxiosResponse<T>> {
-        return this.generateObservable<T>(this.instance.patch, `${url}`, data, config);
-    }
-
-    private generateObservable<T>(Axios: (...args: any[]) => AxiosPromise<T>, ...args: any[]): Observable<AxiosResponse<T>> {
-        return from(Axios(...args));
+        return HttpService.generateObservable<T>(this.instance.patch, `${url}`, data, config);
     }
 }
