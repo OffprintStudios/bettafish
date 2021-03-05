@@ -11,7 +11,7 @@
         --dropshadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         --text-color: black;
         --borders: grey;
-        --code-background: #f0f0f0;
+        --code-background: lightgrey;
         /* Widths */
         --max-width: 90%;
         --max-width-mobile: 97.5%;
@@ -78,15 +78,6 @@
 
     :global(p) {
         margin: 1rem 0 1rem 0;
-    }
-
-    :global(input[type='text']),
-    :global(input[type='email']),
-    :global(input[type='password']) {
-        display: block;
-        border-radius: 6px;
-        width: 100%;
-        margin-top: 1.25rem;
     }
 
     :global(hr) {

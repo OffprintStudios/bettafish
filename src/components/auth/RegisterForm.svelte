@@ -3,6 +3,7 @@
     import { closeModal } from 'yasp-modals';
     import type { RegisterUser } from '../../models/auth';
     import Toggle from '../ui/inputs/Toggle.svelte';
+    import TextInput from '../ui/inputs/TextInput.svelte';
     import { AuthService } from "../../shared/auth";
 
     const auth = new AuthService();
@@ -26,45 +27,11 @@
 
 <form on:submit={onSubmit}>
     <div class="mb-8">
-        <input
-            name="email"
-            id="email"
-            type="email"
-            placeholder="Email Address"
-            bind:value={registerUser.email}
-            required
-        />
-        <input
-            name="username"
-            id="username"
-            type="text"
-            placeholder="Username"
-            bind:value={registerUser.username}
-            required
-        />
-        <input
-            name="password"
-            id="password"
-            type="password"
-            placeholder="Password"
-            bind:value={registerUser.password}
-            required
-        />
-        <input
-            name="repeatPassword"
-            id="repeatPassword"
-            type="password"
-            placeholder="Repeat Password"
-            bind:value={registerUser.repeatPassword}
-            required
-        />
-        <input
-            name="inviteCode"
-            id="inviteCode"
-            type="text"
-            placeholder="Invite Code"
-            bind:value={registerUser.inviteCode}
-        />
+        <TextInput bind:value={registerUser.email} id="email" type="email" label="Email Address" placeholder="someone@example.com" />
+        <TextInput bind:value={registerUser.username} id="username" label="Username" placeholder="Beatriz Ex Machina" />
+        <TextInput bind:value={registerUser.password} id="password" type="password" label="Password" placeholder="••••••••••"/>
+        <TextInput bind:value={registerUser.repeatPassword} id="repeatPassword" type="password" label="Repeat Password" placeholder="••••••••••"/>
+        <TextInput bind:value={registerUser.inviteCode} id="inviteCode" label="Invite Code" placeholder="myInviteCode" />
     </div>
 
     <div class="block">

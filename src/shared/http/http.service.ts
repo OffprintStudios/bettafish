@@ -3,6 +3,8 @@ import type { AxiosInstance, AxiosPromise, AxiosResponse } from 'axios';
 import { from, Observable, throwError } from 'rxjs';
 import {catchError, map, take} from 'rxjs/operators';
 import type { HttpOptions } from './http-options.model';
+import { AuthState } from '../auth';
+import { get } from 'svelte/store';
 
 /**
  * Borrowed heavily from NestJS's HTTP Service implementation.
@@ -20,7 +22,8 @@ export class HttpService {
         return from(Axios(...args)).pipe(take(1));
     }
 
-    constructor (public token?: string) {   
+    constructor () {
+        const token = get(AuthState);
         this.instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 

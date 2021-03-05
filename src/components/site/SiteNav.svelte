@@ -3,18 +3,19 @@
     import { HomeIcon, MapIcon, UsersIcon, SearchIcon, LogInIcon, LogOutIcon, MessageCircleIcon, BellIcon, HardDriveIcon } from 'svelte-feather-icons';
     import { openModal } from 'yasp-modals';
     import AuthModal from '../auth/AuthModal.svelte';
-    import { AuthState, AuthService } from "../../shared/auth";
+    import { AuthService, AuthState } from "../../shared/auth";
+    import { UserState } from '../../shared/user';
 
-    function logOut(token: string) {
-        const auth = new AuthService(token);
+    function logOut() {
+        const auth = new AuthService();
         auth.logout().subscribe();
     }
 </script>
 
-<nav class="h-full relative top-auto left-0 flex flex-col shadow-2xl">
-    {#if $AuthState}
+<nav class="h-full relative top-auto left-0 flex flex-col shadow-2xl py-2">
+    {#if $UserState}
         <a class="link avatar" href={$url('./index')}>
-            <img class="avatar" src={$AuthState.profile.avatar} alt="Avatar" />
+            <img class="avatar" src={$UserState.profile.avatar} alt="Avatar" />
         </a>
     {/if}
     <a href={$url('./index')} class="link" class:active={$isActive('./index')}>
@@ -29,8 +30,8 @@
     <a href={$url('./social')} class="link" class:active={$isActive('./social')}>
         <span class="link-icon"><UsersIcon size="28" strokeWidth="1" /></span>
     </a>
-    {#if $AuthState}
-        <a href={$url('./search')} class="link">
+    {#if $UserState}
+        <a href={$url('./my-stuff')} class="link" class:active={$isActive('./my-stuff')}>
             <span class="link-icon"><HardDriveIcon size="28" strokeWidth="1" /></span>
         </a>
         <a href={$url('./search')} class="link">
@@ -42,7 +43,7 @@
     {/if}
     <div class="flex-1"><!--spacer--></div>
     {#if $AuthState}
-        <button class="link" on:click={() => logOut($AuthState.token)}>
+        <button class="link" on:click={() => logOut()}>
             <span class="link-icon"><LogOutIcon size="28" strokeWidth="1" /></span>
         </button>
     {:else}

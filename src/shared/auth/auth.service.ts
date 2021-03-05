@@ -2,13 +2,14 @@ import type { LoginUser, RegisterUser } from '../../models/auth';
 import type { User } from '../../models/user';
 import { HttpService } from '../http';
 import { AuthState } from "./auth.state";
+import { UserState } from '../user';
 
 export class AuthService {
     private url = `/api/auth`;
     private http: HttpService;
 
-    constructor (token?: string) {
-        this.http = new HttpService(token);
+    constructor () {
+        this.http = new HttpService();
     }
 
     public login(credentials: LoginUser) {
@@ -16,7 +17,8 @@ export class AuthService {
             observe: 'response',
             withCredentials: true,
         }), res => {
-            AuthState.set(res.data);
+            AuthState.set(res.data.token);
+            UserState.set(res.data);
         });
     }
 
@@ -25,7 +27,8 @@ export class AuthService {
             observe: 'response', 
             withCredentials: true,
         }), res => {
-            AuthState.set(res.data);
+            AuthState.set(res.data.token);
+            UserState.set(res.data);
         });
     }
 
@@ -35,6 +38,7 @@ export class AuthService {
             withCredentials: true,
         }), () => {
             AuthState.set(null);
+            UserState.set(null);
         });
     }
 }

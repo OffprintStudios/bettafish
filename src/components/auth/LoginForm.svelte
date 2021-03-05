@@ -4,6 +4,7 @@
     import type { LoginUser } from '../../models/auth';
     import { AuthService } from "../../shared/auth";
     import Toggle from '../ui/inputs/Toggle.svelte';
+    import TextInput from '../ui/inputs/TextInput.svelte';
 
     const auth = new AuthService();
 
@@ -22,15 +23,8 @@
 
 <form on:submit|preventDefault={onSubmit}>
     <div class="mb-8">
-        <input name="email" id="email" type="email" placeholder="Email Address" bind:value={loginUser.email} required />
-        <input
-            name="password"
-            id="password"
-            type="password"
-            placeholder="Password"
-            bind:value={loginUser.password}
-            required
-        />
+        <TextInput bind:value={loginUser.email} id="email" type="email" label="Email Address" placeholder="someone@example.com" />
+        <TextInput bind:value={loginUser.password} id="password" type="password" label="Password" placeholder="••••••••••"/>
     </div>
 
     <div class="flex flex-row items-center">
