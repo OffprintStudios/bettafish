@@ -1,8 +1,16 @@
-<div class="flex flex-row">
-    <div class="w-1/2 text-center">
-        <img class="beatriz" src="assets/images/Beatriz.png" alt="Beatriz">
-    </div>
-    
+<script lang="ts">
+    import { slogans } from "../models/titles";
+
+    const rotatingSlogan = slogans[Math.floor(Math.random() * slogans.length)];
+</script>
+
+<div class="header rounded-md my-4 text-center w-11/12 mx-auto p-4 shadow-xl relative">
+    <img class="offprint-logo" src="assets/images/logo.png" alt="offprint" />
+    <h2>{rotatingSlogan}</h2>
+    <h3 class="absolute top-0 right-0 text-white p-2">ver. alpha-0.8.0</h3>
+</div>
+
+<div class="flex flex-row container mx-auto">
     <div class="w-1/2">
         <h2 style="margin-bottom: 0">Welcome to Offprint!</h2>
         <hr style="margin-top: 0" />
@@ -27,9 +35,27 @@
         <p>With all that said, see you guys on the flip side!</p>
         <p style="text-align: right">&mdash;Offprint Studios</p>
     </div>
+    <div class="w-1/2 text-center">
+        <img class="beatriz" src="assets/images/Beatriz.png" alt="Beatriz">
+    </div>
 </div>
 
 <style lang="less">
+    div.header {
+      background: var(--accent);
+      h2 {
+        color: whitesmoke;
+        text-transform: lowercase;
+        font-variant: small-caps;
+        letter-spacing: 4px;
+        font-size: 24px;
+      }
+      img.offprint-logo {
+        max-width: 20rem;
+        margin: 0 auto;
+      }
+    }
+
     h2 {
         font-size: 36px;
     }

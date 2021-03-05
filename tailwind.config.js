@@ -1,5 +1,3 @@
-const isProduction = !process.env.ROLLUP_WATCH;
-
 module.exports = {
     purge: {
         content: ['./src/**/*.svelte'],
@@ -9,7 +7,7 @@ module.exports = {
             const matches = broadMatches.concat(broadMatchesWithoutTrailingSlash);
             return matches;
         },
-        enabled: isProduction,
+        enabled: process.env.NODE_ENV === 'production',
     },
     darkMode: false, // or 'media' or 'class'
     theme: {

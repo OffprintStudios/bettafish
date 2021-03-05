@@ -1,8 +1,7 @@
 <script lang="ts">
     import { Modals } from 'yasp-modals';
-    import Stylesheet from '../components/util/Stylesheet.svelte';
-    import SiteNav from '../components/util/global/SiteNav.svelte';
-    import Footer from '../components/util/global/Footer.svelte';
+    import Stylesheet from '../components/site/Stylesheet.svelte';
+    import SiteNav from '../components/site/SiteNav.svelte';
 
     const modalOptions = {
         close: {
@@ -13,12 +12,20 @@
 
 <Stylesheet />
 
-<main class="flex flex-col">
+<main class="content flex flex-row">
     <SiteNav />
-    <div class="container mx-auto flex-1">
+    <div class="flex-auto overflow-y-auto">
         <slot />
     </div>
-    <Footer />
 </main>
 
 <Modals options={modalOptions} />
+
+<style lang="less">
+    main {
+        height: 100vh;
+        color: var(--text-color);
+        font-family: var(--body-text);
+        background-color: var(--background);
+    }
+</style>

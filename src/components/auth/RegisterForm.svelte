@@ -2,7 +2,7 @@
     // @ts-ignore
     import { closeModal } from 'yasp-modals';
     import type { RegisterUser } from '../../models/auth';
-    import Toggle from '../util/inputs/Toggle.svelte';
+    import Toggle from '../ui/inputs/Toggle.svelte';
     import { AuthService } from "../../shared/auth";
 
     const auth = new AuthService();

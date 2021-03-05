@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import type { AxiosInstance, AxiosPromise, AxiosResponse } from 'axios';
 import { from, Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import {catchError, map, take} from 'rxjs/operators';
 import type { HttpOptions } from './http-options.model';
 
 /**
@@ -17,7 +17,7 @@ export class HttpService {
     });
 
     private static generateObservable<T>(Axios: (...args: any[]) => AxiosPromise<T>, ...args: any[]): Observable<AxiosResponse<T>> {
-        return from(Axios(...args));
+        return from(Axios(...args)).pipe(take(1));
     }
 
     constructor (public token?: string) {   

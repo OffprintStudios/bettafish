@@ -3,7 +3,7 @@
     import { closeModal } from 'yasp-modals';
     import type { LoginUser } from '../../models/auth';
     import { AuthService } from "../../shared/auth";
-    import Toggle from '../util/inputs/Toggle.svelte';
+    import Toggle from '../ui/inputs/Toggle.svelte';
 
     const auth = new AuthService();
 

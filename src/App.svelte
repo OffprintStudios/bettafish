@@ -1,4 +1,5 @@
 <script lang="ts">
+    // @ts-ignore
 	import { Router } from '@roxi/routify';
     import { routes } from '../.routify/routes';
 </script>
