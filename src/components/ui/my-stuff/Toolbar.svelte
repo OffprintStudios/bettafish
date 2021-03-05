@@ -1,13 +1,19 @@
 <script lang="ts">
     import { LoaderIcon, CircleIcon, Edit3Icon, XIcon, ShareIcon, TrashIcon, ListIcon, GridIcon, FilterIcon } from 'svelte-feather-icons';
+    import Menu from '../misc/Menu.svelte';
+
+    let showCreateMenu = false;
+    const toggleCreateMenu = () => showCreateMenu = !showCreateMenu;
 </script>
 
 <div class="tools flex flex-row rounded-md p-2 m-8 shadow-lg">
     <!--Creation-->
-    <button class="shadow-none">
-        <span class="inline-block relative top-0.5 leading-3"><LoaderIcon size="18" /></span>
-        <span class="leading-3 relative -top-0.5">Create</span>
-    </button>
+    <div class="relative">
+        <button class="shadow-none relative" on:click={toggleCreateMenu}>
+            <span class="inline-block relative top-0.5 leading-3"><LoaderIcon size="18" /></span>
+            <span class="leading-3 relative -top-0.5">Create</span>
+        </button>
+    </div>
     <div class="mx-1"></div>
 
     <!--Publishing-->
@@ -47,6 +53,12 @@
         <span class="inline-block relative top-0.5 leading-3"><FilterIcon size="18" /></span>
     </button>
 </div>
+
+<Menu id="create" bind:show={showCreateMenu}>
+    <button class="menu-item">Add Prose</button>
+    <button class="menu-item">Add Poetry</button>
+    <button class="menu-item">Add Blog</button>
+</Menu>
 
 <style lang="less">
     div.tools {
