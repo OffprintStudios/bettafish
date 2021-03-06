@@ -25,7 +25,7 @@
     }
 </script>
 
-<form on:submit={onSubmit}>
+<form on:submit|preventDefault={onSubmit}>
     <div class="mb-8">
         <TextInput bind:value={registerUser.email} id="email" type="email" label="Email Address" placeholder="someone@example.com" />
         <TextInput bind:value={registerUser.username} id="username" label="Username" placeholder="Beatriz Ex Machina" />
